@@ -1,0 +1,45 @@
+{
+  "events": [
+    {
+      "id": "1",
+      "title": "Ideation Sprint 2026",
+      "department": "CSE",
+      "category": "Hackathon",
+      "description": "A 24-hour build sprint where student teams pitch and prototype solutions to real campus problems.",
+      "date": "2026-08-14",
+      "time": "09:00",
+      "venue": "Innovation Hall, Block C",
+      "seats": 60,
+      "organizer": "CSE Department Association",
+      "createdAt": "2026-07-01T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "title": "Inter-Department Cricket Cup",
+      "department": "Sports",
+      "category": "Sports",
+      "description": "Knockout cricket tournament between all departments. Register your department team.",
+      "date": "2026-08-20",
+      "time": "07:30",
+      "venue": "Main Sports Ground",
+      "seats": 120,
+      "organizer": "Sports Committee",
+      "createdAt": "2026-07-01T10:00:00.000Z"
+    },
+    {
+      "id": "3",
+      "title": "Classical Strings Evening",
+      "department": "Music Club",
+      "category": "Cultural",
+      "description": "An evening of classical and contemporary string performances by the college orchestra.",
+      "date": "2026-08-22",
+      "time": "18:30",
+      "venue": "Auditorium",
+      "seats": 200,
+      "organizer": "Music Club",
+      "createdAt": "2026-07-01T10:00:00.000Z"
+    }
+  ],
+  "registrations": [],
+  "adminPassword": "admin123"
+}

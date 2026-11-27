@@ -1,0 +1,13 @@
+{
+  "name": "college-event-manager",
+  "version": "1.0.0",
+  "description": "College Event Management System - zero-dependency Node.js app",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "license": "MIT"
+}

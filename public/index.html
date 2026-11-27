@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Campus Ledger — College Event Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <div class="brand">
+      <span class="brand-mark">CL</span>
+      <div class="brand-text">
+        <h1>Campus Ledger</h1>
+        <p>College Event Management System</p>
+      </div>
+    </div>
+    <nav class="tabs" id="tabs">
+      <button class="tab-btn active" data-tab="browse">Browse Events</button>
+      <button class="tab-btn" data-tab="mine">My Registrations</button>
+      <button class="tab-btn" data-tab="admin">Admin</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- BROWSE TAB -->
+  <section id="tab-browse" class="tab-panel active">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">This term's listings</p>
+        <h2>Open Events</h2>
+      </div>
+      <div class="filter-row">
+        <input type="text" id="searchInput" placeholder="Search by title or department…" />
+        <select id="categoryFilter">
+          <option value="">All categories</option>
+        </select>
+      </div>
+    </div>
+    <div id="eventList" class="event-list"></div>
+    <p id="browseEmpty" class="empty-note" hidden>No events match your search yet.</p>
+  </section>
+
+  <!-- MY REGISTRATIONS TAB -->
+  <section id="tab-mine" class="tab-panel">
+    <div class="panel-head">
+      <div>
+        <p class="eyebrow">Look yourself up</p>
+        <h2>My Registrations</h2>
+      </div>
+    </div>
+    <form id="lookupForm" class="inline-form">
+      <input type="email" id="lookupEmail" placeholder="you@college.edu" required />
+      <button type="submit" class="btn btn-primary">Find my events</button>
+    </form>
+    <div id="myRegList" class="reg-list"></div>
+  </section>
+
+  <!-- ADMIN TAB -->
+  <section id="tab-admin" class="tab-panel">
+    <div id="adminLoginBlock">
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Staff only</p>
+          <h2>Admin Sign-in</h2>
+        </div>
+      </div>
+      <form id="adminLoginForm" class="inline-form">
+        <input type="password" id="adminPassword" placeholder="Admin password" required />
+        <button type="submit" class="btn btn-primary">Sign in</button>
+      </form>
+      <p class="hint">Default demo password is <code>admin123</code> — set in <code>data.json</code>.</p>
+      <p id="adminLoginError" class="error-note" hidden></p>
+    </div>
+
+    <div id="adminPanel" hidden>
+      <div class="panel-head">
+        <div>
+          <p class="eyebrow">Manage the term</p>
+          <h2>Admin Dashboard</h2>
+        </div>
+        <button id="logoutBtn" class="btn btn-ghost">Sign out</button>
+      </div>
+
+      <details class="create-event" open>
+        <summary>Create a new event</summary>
+        <form id="createEventForm" class="event-form">
+          <div class="field-row">
+            <label>Title
+              <input type="text" name="title" required />
+            </label>
+            <label>Department / Club
+              <input type="text" name="department" placeholder="e.g. CSE, Sports, Music Club" />
+            </label>
+          </div>
+          <div class="field-row">
+            <label>Category
+              <input type="text" name="category" placeholder="e.g. Hackathon, Cultural, Sports" />
+            </label>
+            <label>Organizer
+              <input type="text" name="organizer" placeholder="e.g. CSE Department Association" />
+            </label>
+          </div>
+          <label>Description
+            <textarea name="description" rows="3"></textarea>
+          </label>
+          <div class="field-row">
+            <label>Date
+              <input type="date" name="date" required />
+            </label>
+            <label>Time
+              <input type="time" name="time" required />
+            </label>
+            <label>Seats
+              <input type="number" name="seats" min="1" required />
+            </label>
+          </div>
+          <label>Venue
+            <input type="text" name="venue" required />
+          </label>
+          <button type="submit" class="btn btn-primary">Publish event</button>
+          <p id="createEventError" class="error-note" hidden></p>
+        </form>
+      </details>
+
+      <div class="panel-head" style="margin-top:2.5rem;">
+        <div>
+          <p class="eyebrow">Everything on the books</p>
+          <h2>All Events</h2>
+        </div>
+      </div>
+      <div id="adminEventList" class="admin-event-list"></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Registration modal -->
+<div id="registerModal" class="modal-overlay" hidden>
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">&times;</button>
+    <p class="eyebrow" id="modalEyebrow">Register</p>
+    <h3 id="modalEventTitle"></h3>
+    <p id="modalEventMeta" class="modal-meta"></p>
+    <form id="registerForm">
+      <label>Full name
+        <input type="text" name="name" required />
+      </label>
+      <label>College email
+        <input type="email" name="email" required />
+      </label>
+      <label>Roll number
+        <input type="text" name="rollNo" required />
+      </label>
+      <button type="submit" class="btn btn-primary">Confirm registration</button>
+      <p id="registerError" class="error-note" hidden></p>
+    </form>
+  </div>
+</div>
+
+<!-- Registrations viewer modal (admin) -->
+<div id="regsModal" class="modal-overlay" hidden>
+  <div class="modal">
+    <button class="modal-close" id="regsModalClose" aria-label="Close">&times;</button>
+    <p class="eyebrow">Registered students</p>
+    <h3 id="regsModalTitle"></h3>
+    <div id="regsModalList" class="regs-table"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="/app.js"></script>
+</body>
+</html>
